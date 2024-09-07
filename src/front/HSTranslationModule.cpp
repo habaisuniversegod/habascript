@@ -24,8 +24,17 @@ void HSTranslationModule::process_reader(HSReadSource *reader)
 
 void HSTranslationModule::process_lexer(HSLexer *lexer)
 {
+    this->lexer = lexer;
     lexer->reload(reader->get_text(), id);
     lexer->process();
+}
+
+void HSTranslationModule::process_parser(HSParser *parser)
+{
+    this->parser = parser;
+    parser->reload(get_tokens(), id);
+    parser->process();
+
 }
 
 int HSTranslationModule::get_id()
@@ -46,4 +55,17 @@ const std::string &HSTranslationModule::get_text() const
 const std::vector<HSToken> &HSTranslationModule::get_tokens() const
 {
     return lexer->get_tokens();
+}
+
+HSNode *HSTranslationModule::get_root() const
+{
+    return parser->get_root();
+}
+
+void HSTranslationModule::clear()
+{
+    delete get_root();
+    parser->clear();
+    lexer->clear();
+    reader->clear();
 }

@@ -1,3 +1,4 @@
+#pragma once
 #include "../../HSGlobals.h"
 #include "HSToken.h"
 #include "HSSpecialTokens.h"

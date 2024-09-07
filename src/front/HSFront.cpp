@@ -1,9 +1,8 @@
 #include "../HSGlobals.h"
 #include "HSTranslationModule.h"
+#include "parser/expression/HSAllExpressions.h"
 
 #include <unistd.h>
-
-#include "parser/expression/HSAllExpressions.h"
 
 jmp_buf hs_front_exitenv;
 
@@ -30,11 +29,13 @@ int main(int argc, char** argv){
 
     HSReadSource reader;
     HSLexer lexer;
+    HSParser parser;
 
     HSTranslationModule main_program;
     main_program.set_path(argv[optind]);
     main_program.process_reader(&reader);
     main_program.process_lexer(&lexer);
+    main_program.process_parser(&parser);
 
     if (displayModuleInfo){
         printf("-------------------------------------------\nModule %d: '%s'\n-------------------------------------------\n%s\n", main_program.get_id(), main_program.get_path().c_str(), main_program.get_text().c_str());
@@ -43,7 +44,10 @@ int main(int argc, char** argv){
                 i.repr();
             }
         }
+        printf("%s\n", ((HSExpression*)main_program.get_root())->repr().c_str());
     }
+
+    main_program.clear();
 
     terminate(0);
 }

@@ -51,10 +51,8 @@ void HSLexer::process_string_literal()
     next();
     while (true){
         c = get();
-        if (c == HS_TEXTTERM) {
-            fprintf(stderr, "err -1");
-            HS_EXIT(-1);
-        }
+        if (c == HS_TEXTTERM)
+            HS_ERR_STRINGNOTCLOSED(eol_counter, module_id);
         if (c == HS_STRINGQUOTE){
             next();
             break;
