@@ -76,15 +76,15 @@ HSTranslationModule.o: src/front/HSTranslationModule.cpp src/front/HSTranslation
 # Global files
 
 HSErrorPrinter.o: src/HSErrorPrinter.c src/HSErrorPrinter.h
-	$(COMP_CPP) -c $@ $< 
+	$(COMP_C) -c $@ $< 
 
 # Back files
 
 HSConstruct.o: src/back/value/HSConstruct.c src/back/value/HSConstruct.h
-	$(COMP_CPP) -c $@ $< 
+	$(COMP_C) -c $@ $< 
 
 HSValue.o: src/back/value/HSValue.c src/back/value/HSValue.h
-	$(COMP_CPP) -c $@ $< 
+	$(COMP_C) -c $@ $< 
 
 # Other
 
