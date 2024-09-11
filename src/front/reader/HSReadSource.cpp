@@ -1,7 +1,7 @@
 #include "HSReadSource.h"
 #include "../../HSGlobals.h"
-#include "../../HSErrorPrinter.h"
 #include <fstream>
+#include "../../HSErrorPrinter.h"
 
 HSReadSource::HSReadSource()
 {

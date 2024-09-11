@@ -14,6 +14,9 @@ const std::unordered_map<std::string, HSTokenType> HS_KEYWORDS =
     {"and", TOK_AND},
     {"or", TOK_OR},
     {"not", TOK_NOT},
+    {"true", TOK_TRUE},
+    {"false", TOK_FALSE},
+    {"null", TOK_NULL},
 };
 
 HSTokenType hs_is_keyword(const std::string& value){

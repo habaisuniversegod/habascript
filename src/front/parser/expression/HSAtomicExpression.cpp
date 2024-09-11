@@ -1,6 +1,6 @@
 #include "HSAtomicExpression.h"
 
-HSAtomicExpression::HSAtomicExpression(double value)
+HSAtomicExpression::HSAtomicExpression(HSConstant value)
 {
     raw_value = value;
     type = EX_ATOM;
@@ -10,14 +10,14 @@ HSAtomicExpression::~HSAtomicExpression()
 {
 }
 
-double &HSAtomicExpression::raw()
+HSConstant &HSAtomicExpression::raw()
 {
     return raw_value;
 }
 
 std::string HSAtomicExpression::repr()
 {
-    return std::to_string(raw_value) + "f";
+    return "(" + raw_value.repr() + ")";
 }
 
 void HSAtomicExpression::accept(HSTraverseVisitor &)

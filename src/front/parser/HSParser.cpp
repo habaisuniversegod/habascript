@@ -1,6 +1,6 @@
 #include "HSParser.h"
-#include "../../HSErrorPrinter.h"
 #include "expression/HSAllExpressions.h"
+#include "../../HSErrorPrinter.h"
 
 extern void terminate(int);
 const HSToken HSParser::HS_CONST_EOF = {TOK_EOF, "", -1, -1};
@@ -76,8 +76,26 @@ HSExpression *HSParser::parse_prefixopers()
 
 HSExpression *HSParser::parse_atom()
 {
-    if (match(TOK_INT) || match(TOK_FLOAT)){
-        return new HSAtomicExpression(atof(get(-1).value.c_str()));
+    HSConstant atom_value = HSConstant();
+    if (match(TOK_INT)){
+        atom_value.set_as_int(atoll(get(-1).value.c_str()));
+        return new HSAtomicExpression(atom_value);
+    }
+    if (match(TOK_FLOAT)){
+        atom_value.set_as_float(atof(get(-1).value.c_str()));
+        return new HSAtomicExpression(atom_value);
+    }
+    if (match(TOK_TRUE)){
+        atom_value.set_as_bool(true);
+        return new HSAtomicExpression(atom_value);
+    }
+    if (match(TOK_FALSE)){
+        atom_value.set_as_bool(false);
+        return new HSAtomicExpression(atom_value);
+    }
+    if (match(TOK_NULL)){
+        atom_value.set_as_null();
+        return new HSAtomicExpression(atom_value);
     }
     if (match(TOK_STRING)){
         // TODO: sttrings

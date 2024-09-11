@@ -27,3 +27,8 @@ int HSNode::get_module_id()
 {
     return module_id;
 }
+
+std::string HSNode::repr()
+{
+    return "<HSNode>";
+}

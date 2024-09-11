@@ -13,8 +13,3 @@ HSExpressionType HSExpression::get_type()
 {
     return type;
 }
-
-std::string HSExpression::repr()
-{
-    return "<expression>";
-}

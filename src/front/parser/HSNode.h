@@ -1,5 +1,6 @@
 #pragma once
 #include "../../HSGlobals.h"
+#include <string>
 
 class HSTraverseVisitor;
 
@@ -17,4 +18,5 @@ public:
     int get_module_id();
 
     virtual void accept(HSTraverseVisitor& hstv) = 0;
+    virtual std::string repr();
 };

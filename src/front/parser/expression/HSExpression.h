@@ -12,5 +12,4 @@ public:
     virtual ~HSExpression() = 0;
     
     HSExpressionType get_type();
-    virtual std::string repr();
 };

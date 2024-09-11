@@ -35,7 +35,7 @@ void HSLexer::process_number()
         if (c == HS_FLOATDELIM){
             type = TOK_FLOAT;
         }
-        if (!is_intchar(c)){
+        if (!is_intchar(c) && c != HS_FLOATDELIM){
             break;
         }
         buffer += c;
