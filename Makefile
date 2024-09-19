@@ -8,7 +8,11 @@ all: hsfront
 hs_all_headers := $(wildcard **/*.h)
 
 hs_front_obj = \
-HSConstant.o \
+HSConst.o \
+HSConstNull.o \
+HSConstBool.o \
+HSConstInt.o \
+HSConstFloat.o \
 HSLexer.o \
 HSSpecialTokens.o \
 HSToken.o \
@@ -22,68 +26,70 @@ HSParser.o \
 HSReadSource.o \
 HSFront.o \
 HSTranslationModule.o \
-HSErrorPrinter.o \
-HSConstruct.o \
-HSValue.o
+HSErrorPrinter.o
 
-hsfront: $(hs_all_headers) $(hs_front_obj)
+hsfront: $(hs_front_obj)
 	$(COMP_CPP) $(hs_front_obj) -o $@ 
 
 # Front files
 
-HSConstant.o: src/front/frontvalue/HSConstant.cpp src/front/frontvalue/HSConstant.h
+HSConst.o: src/front/frontvalue/HSConst.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSLexer.o: src/front/lexer/HSLexer.cpp src/front/lexer/HSLexer.h
+HSConstNull.o: src/front/frontvalue/HSConstNull.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSSpecialTokens.o: src/front/lexer/HSSpecialTokens.cpp src/front/lexer/HSSpecialTokens.h
+HSConstBool.o: src/front/frontvalue/HSConstBool.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSToken.o: src/front/lexer/HSToken.cpp src/front/lexer/HSToken.h
+HSConstInt.o: src/front/frontvalue/HSConstInt.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSTokenType.o: src/front/lexer/HSTokenType.cpp src/front/lexer/HSTokenType.h
+HSConstFloat.o: src/front/frontvalue/HSConstFloat.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSAtomicExpression.o: src/front/parser/expression/HSAtomicExpression.cpp src/front/parser/expression/HSAtomicExpression.h
+HSLexer.o: src/front/lexer/HSLexer.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSBinaryExpression.o: src/front/parser/expression/HSBinaryExpression.cpp src/front/parser/expression/HSBinaryExpression.h
+HSSpecialTokens.o: src/front/lexer/HSSpecialTokens.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSExpression.o: src/front/parser/expression/HSExpression.cpp src/front/parser/expression/HSExpression.h
+HSToken.o: src/front/lexer/HSToken.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSUnaryExpression.o: src/front/parser/expression/HSUnaryExpression.cpp src/front/parser/expression/HSUnaryExpression.h
+HSTokenType.o: src/front/lexer/HSTokenType.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSNode.o: src/front/parser/HSNode.cpp src/front/parser/HSNode.h
+HSAtomicExpression.o: src/front/parser/expression/HSAtomicExpression.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSParser.o: src/front/parser/HSParser.cpp src/front/parser/HSParser.h
+HSBinaryExpression.o: src/front/parser/expression/HSBinaryExpression.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
-HSReadSource.o: src/front/reader/HSReadSource.cpp src/front/reader/HSReadSource.h
+HSExpression.o: src/front/parser/expression/HSExpression.cpp $(hs_all_headers)
+	$(COMP_CPP) -c $@ $<
+
+HSUnaryExpression.o: src/front/parser/expression/HSUnaryExpression.cpp $(hs_all_headers)
+	$(COMP_CPP) -c $@ $<
+
+HSNode.o: src/front/parser/HSNode.cpp $(hs_all_headers)
+	$(COMP_CPP) -c $@ $<
+
+HSParser.o: src/front/parser/HSParser.cpp $(hs_all_headers)
+	$(COMP_CPP) -c $@ $<
+
+HSReadSource.o: src/front/reader/HSReadSource.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
 HSFront.o: src/front/HSFront.cpp
 	$(COMP_CPP) -c $@ $<
 
-HSTranslationModule.o: src/front/HSTranslationModule.cpp src/front/HSTranslationModule.h
+HSTranslationModule.o: src/front/HSTranslationModule.cpp $(hs_all_headers)
 	$(COMP_CPP) -c $@ $<
 
 # Global files
 
-HSErrorPrinter.o: src/HSErrorPrinter.c src/HSErrorPrinter.h
-	$(COMP_C) -c $@ $< 
-
-# Back files
-
-HSConstruct.o: src/back/value/HSConstruct.c src/back/value/HSConstruct.h
-	$(COMP_C) -c $@ $< 
-
-HSValue.o: src/back/value/HSValue.c src/back/value/HSValue.h
+HSErrorPrinter.o: src/HSErrorPrinter.c $(hs_all_headers)
 	$(COMP_C) -c $@ $< 
 
 # Other

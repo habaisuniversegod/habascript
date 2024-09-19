@@ -1,5 +1,6 @@
 #include "HSParser.h"
 #include "expression/HSAllExpressions.h"
+#include "../frontvalue/HSAllConsts.h"
 #include "../../HSErrorPrinter.h"
 
 extern void terminate(int);
@@ -76,26 +77,20 @@ HSExpression *HSParser::parse_prefixopers()
 
 HSExpression *HSParser::parse_atom()
 {
-    HSConstant atom_value = HSConstant();
     if (match(TOK_INT)){
-        atom_value.set_as_int(atoll(get(-1).value.c_str()));
-        return new HSAtomicExpression(atom_value);
+        return new HSAtomicExpression(new HSConstInt(atoll(get(-1).value.c_str())));
     }
     if (match(TOK_FLOAT)){
-        atom_value.set_as_float(atof(get(-1).value.c_str()));
-        return new HSAtomicExpression(atom_value);
+        return new HSAtomicExpression(new HSConstFloat(atof(get(-1).value.c_str())));
     }
     if (match(TOK_TRUE)){
-        atom_value.set_as_bool(true);
-        return new HSAtomicExpression(atom_value);
+        return new HSAtomicExpression(new HSConstBool(true));
     }
     if (match(TOK_FALSE)){
-        atom_value.set_as_bool(false);
-        return new HSAtomicExpression(atom_value);
+        return new HSAtomicExpression(new HSConstBool(false));
     }
     if (match(TOK_NULL)){
-        atom_value.set_as_null();
-        return new HSAtomicExpression(atom_value);
+        return new HSAtomicExpression(new HSConstNull);
     }
     if (match(TOK_STRING)){
         // TODO: sttrings

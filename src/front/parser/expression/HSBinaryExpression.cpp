@@ -18,7 +18,3 @@ std::string HSBinaryExpression::repr()
 {
     return "(" + left->repr() + " " + HS_TOKENTYPE_NAMES[operation] + " " + right->repr() + ")";
 }
-
-void HSBinaryExpression::accept(HSTraverseVisitor &)
-{
-}

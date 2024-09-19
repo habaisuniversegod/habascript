@@ -12,5 +12,4 @@ public:
     ~HSUnaryExpression() override;
 
     virtual std::string repr() override;
-    virtual void accept(HSTraverseVisitor&);
 };

@@ -2,8 +2,6 @@
 #include "../../HSGlobals.h"
 #include <string>
 
-class HSTraverseVisitor;
-
 class HSNode {
 protected:
     int line;
@@ -17,6 +15,5 @@ public:
     void set_module_id(int module_id);
     int get_module_id();
 
-    virtual void accept(HSTraverseVisitor& hstv) = 0;
     virtual std::string repr();
 };

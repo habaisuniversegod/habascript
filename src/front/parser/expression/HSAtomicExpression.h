@@ -1,15 +1,14 @@
 #pragma once
 #include "../../../HSGlobals.h"
 #include "HSExpression.h"
-#include "../../frontvalue/HSConstant.h"
+#include "../../frontvalue/HSConst.h"
 
 class HSAtomicExpression final: public HSExpression {
-    HSConstant raw_value;
+    HSConst* raw_value;
 public:
-    HSAtomicExpression(HSConstant value);
+    HSAtomicExpression(HSConst* value);
     ~HSAtomicExpression() override;
 
-    HSConstant& raw();
+    HSConst* raw();
     virtual std::string repr() override;
-    virtual void accept(HSTraverseVisitor&);
 };

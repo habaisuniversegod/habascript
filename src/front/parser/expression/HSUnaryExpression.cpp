@@ -16,7 +16,3 @@ std::string HSUnaryExpression::repr()
 {
     return "(" + HS_TOKENTYPE_NAMES[operation] + " " + operand->repr() + ")";
 }
-
-void HSUnaryExpression::accept(HSTraverseVisitor &)
-{
-}
